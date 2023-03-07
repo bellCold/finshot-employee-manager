@@ -53,9 +53,8 @@
                             <td>
                                 <button class="btn btn-outline-primary"><a th:href="@{/employees/update}">수정하기</a>
                                 </button>
-                                <form th:action="@{'/employees/delete/' + ${employee.id}}" method="post">
+                                <form th:action="@{'/employees/delete/' + ${employee.id}}" th:method="delete">
                                     <button class="btn btn-outline-primary"> 삭제하기</button>
-                                    <input type="hidden" name="_method" value="DELETE">
                                 </form>
                             </td>
                         </tr>

@@ -39,17 +39,16 @@ public class EmployeeService {
     private void toEmployeeListResponseDto(List<Employee> employees, List<Employee> responseDto) {
         responseDto.addAll(employees);
     }
+
+    public void deleteEmployeeByPath(Long path) {
+        Employee employee = employeeRepository.findById(path).orElseThrow(RuntimeException::new);
+        employeeRepository.delete(employee);
+    }
 //
 //    @Transactional
 //    public void update(String path, EmployeeUpdateDto employeeUpdateDto) {
 //        Employee employee = employeeRepository.findById(path).orElseThrow(RuntimeException::new);
 //        employee.update(employeeUpdateDto);
-//    }
-//
-//    @Transactional
-//    public void delete(String path) {
-//        Employee employee = employeeRepository.findById(path).orElseThrow(RuntimeException::new);
-//        employeeRepository.delete(employee);
 //    }
 //
 //    public Employee findEmployee(String path) {

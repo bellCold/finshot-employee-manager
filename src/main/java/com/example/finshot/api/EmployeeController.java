@@ -7,9 +7,7 @@ import com.example.finshot.application.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -51,9 +49,9 @@ public class EmployeeController {
 //        return "redirect:/";
 //    }
 //
-//    @DeleteMapping("/delete/{path}")
-//    public String deleteEmployee(@PathVariable String path) {
-//        employeeService.delete(path);
-//        return "redirect:/";
-//    }
+    @DeleteMapping("/delete/{path}")
+    public String deleteEmployee(@PathVariable Long path) {
+        employeeService.deleteEmployeeByPath(path);
+        return "redirect:/";
+    }
 }
