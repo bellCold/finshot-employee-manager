@@ -9,6 +9,7 @@ import com.example.finshot.domain.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Service
@@ -29,11 +30,12 @@ public class EmployeeService {
         return employeeListResponseDto.getEmployees();
     }
 
-    public EmployeeSearchResponseDto findByField(EmployeeSearchRequestDto employeeSearchRequestDto) {
-        List<Employee> employees = employeeRepository.findEmployee(employeeSearchRequestDto);
-        EmployeeSearchResponseDto employeeSearchResponseDto = new EmployeeSearchResponseDto();
-        toEmployeeListResponseDto(employees, employeeSearchResponseDto.getEmployees());
-        return employeeSearchResponseDto;
+    public List<Employee> findBySearchWord(String searchWord) {
+        return null;
+    }
+
+    private static boolean isNumeric(String searchWord) {
+        return searchWord.matches("-?\\d+(\\.\\d+)?");  // 정규표현식으로 숫자인지 체크
     }
 
     private void toEmployeeListResponseDto(List<Employee> employees, List<Employee> responseDto) {
