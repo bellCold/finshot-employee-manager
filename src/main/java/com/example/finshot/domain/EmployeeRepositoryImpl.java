@@ -20,7 +20,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
     public List<Employee> findEmployee(EmployeeSearchRequestDto employeeSearchRequestDto) {
         BooleanBuilder builder = new BooleanBuilder();
 
-        if (!StringUtils.hasText(employeeSearchRequestDto.getId())) {
+        if (!StringUtils.hasText(String.valueOf(employeeSearchRequestDto.getId()))) {
             builder.and(employee.id.eq(employeeSearchRequestDto.getId()));
         }
         if (!StringUtils.hasText(employeeSearchRequestDto.getPhone())) {

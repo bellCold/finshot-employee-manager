@@ -12,8 +12,7 @@ import javax.validation.constraints.Pattern;
 @Setter
 @NoArgsConstructor
 public class EmployeeUpdateDto {
-
-    private String id;
+    private Long id;
     private String name;
 
     @Pattern(regexp = "^01(?:0|1|[6-9])[.-]?(\\d{3}|\\d{4})[.-]?(\\d{4})$")

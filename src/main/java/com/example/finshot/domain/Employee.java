@@ -4,8 +4,6 @@ import com.example.finshot.api.request.EmployeeUpdateDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 
@@ -15,17 +13,11 @@ import javax.persistence.*;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "numeric_sequence")
-    @GenericGenerator(name = "numeric_sequence", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
-            @Parameter(name = "sequence_name", value = "numeric_sequence"),
-            @Parameter(name = "initial_value", value = "1"),
-            @Parameter(name = "increment_size", value = "1"),
-            @Parameter(name = "number_format", value = "%03d")
-    })
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private EmployeePosition position;
 
     @Column(nullable = false)
@@ -38,7 +30,7 @@ public class Employee {
     private String email;
 
     @Builder
-    public Employee(String id, EmployeePosition position, String name, String phone, String email) {
+    public Employee(Long id, EmployeePosition position, String name, String phone, String email) {
         this.id = id;
         this.position = position;
         this.name = name;

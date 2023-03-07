@@ -12,7 +12,7 @@ import javax.validation.constraints.Pattern;
 @Setter
 @NoArgsConstructor
 public class EmployeeSearchRequestDto {
-    private String id;
+    private Long id;
     private String name;
     private EmployeePosition position;
 
