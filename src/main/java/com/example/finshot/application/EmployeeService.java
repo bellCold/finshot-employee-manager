@@ -23,7 +23,7 @@ public class EmployeeService {
     }
 
     public List<Employee> findAll() {
-        List<Employee> employees = employeeRepository.findAll();
+        List<Employee> employees = employeeRepository.findAllByOrderByName();
         EmployeeListResponseDto employeeListResponseDto = new EmployeeListResponseDto();
         toEmployeeListResponseDto(employees, employeeListResponseDto.getEmployees());
         return employeeListResponseDto.getEmployees();
