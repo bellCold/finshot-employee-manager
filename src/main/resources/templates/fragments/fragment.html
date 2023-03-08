@@ -10,10 +10,50 @@
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 
-<div th:fragment="accountScriptResources">
+<div th:fragment="indexScript">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             crossorigin="anonymous"></script>
     <script src="/js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
     <script src="/js/datatables-simple-demo.js"></script>
 </div>
+
+
+<script th:fragment="phoneScript">
+    var autoHypenPhone = function (str) {
+        str = str.replace(/[^0-9]/g, '');
+        var tmp = '';
+        if (str.length < 4) {
+            return str;
+        } else if (str.length < 7) {
+            tmp += str.substr(0, 3);
+            tmp += '-';
+            tmp += str.substr(3);
+            return tmp;
+        } else if (str.length < 11) {
+            tmp += str.substr(0, 3);
+            tmp += '-';
+            tmp += str.substr(3, 3);
+            tmp += '-';
+            tmp += str.substr(6);
+            return tmp;
+        } else {
+            tmp += str.substr(0, 3);
+            tmp += '-';
+            tmp += str.substr(3, 4);
+            tmp += '-';
+            tmp += str.substr(7);
+            return tmp;
+        }
+
+        return str;
+    }
+
+
+    var phoneNum = document.getElementById('phoneNum');
+
+    phoneNum.onkeyup = function () {
+        console.log(this.value);
+        this.value = autoHypenPhone(this.value);
+    }
+</script>

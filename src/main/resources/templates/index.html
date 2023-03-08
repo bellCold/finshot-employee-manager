@@ -2,13 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/fragment::mainHeadResources"></head>
 <body class="sb-nav-fixed">
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand ps-3" href="index.html">직원 정보 관리</a>
-    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" th:action="@{/employees/search}">
-        <div class="input-group">
-            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <a class="navbar-brand ps-3" th:href="@{/}">직원 정보 관리</a>
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0"
+                  th:action="@{/employees/search}">
+                <div class="input-group">
+                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." name="searchWord"
                    aria-describedby="btnNavbarSearch"/>
-            <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+            <button class="btn btn-primary" id="btnNavbarSearch"><i class="fas fa-search"></i></button>
         </div>
     </form>
     <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -51,11 +52,11 @@
                             <td><span th:text="${employee.phone}"></span></td>
                             <td><span th:text="${employee.email}"></span></td>
                             <td>
-                                <button class="btn btn-outline-primary"><a th:href="@{/employees/update}">수정하기</a>
+                                <button class="btn btn-outline-primary"><a
+                                        th:href="@{'/employees/update/' + ${employee.id}}">수정하기</a>
                                 </button>
-                                <form th:action="@{'/employees/delete/' + ${employee.id}}" method="post">
-                                    <button class="btn btn-outline-primary"> 삭제하기</button>
-                                    <input type="hidden" name="_method" value="DELETE">
+                                <form th:action="@{'/employees/delete/' + ${employee.id}}" th:method="delete">
+                                    <button class="btn btn-outline-primary">삭제하기</button>
                                 </form>
                             </td>
                         </tr>
@@ -67,6 +68,6 @@
         </div>
     </main>
 </div>
-<head th:replace="fragments/fragment::accountScriptResources"></head>
+<div th:replace="fragments/fragment::indexScript"></div>
 </body>
 </html>

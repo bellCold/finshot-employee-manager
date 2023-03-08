@@ -1,4 +1,4 @@
-package com.example.finshot.domain;
+package com.example.finshot.domain.Employee;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -15,7 +15,7 @@ import com.querydsl.core.types.Path;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QEmployee extends EntityPathBase<Employee> {
 
-    private static final long serialVersionUID = -352880290L;
+    private static final long serialVersionUID = -744395426L;
 
     public static final QEmployee employee = new QEmployee("employee");
 

@@ -1,6 +1,6 @@
 package com.example.finshot.api.request;
 
-import com.example.finshot.domain.EmployeePosition;
+import com.example.finshot.domain.Employee.EmployeePosition;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +11,7 @@ import javax.validation.constraints.Pattern;
 @Getter
 @Setter
 @NoArgsConstructor
-public class EmployeeUpdateDto {
+public class EmployeeUpdateRequestDto {
     private Long id;
     private String name;
 

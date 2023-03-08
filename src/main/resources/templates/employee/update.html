@@ -1,38 +1,61 @@
 <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head th:replace="fragments/fragment::mainHeadResources"></head>
-<body>
-<div class="limiter">
-    <div class="container-login100">
-        <div class="wrap-login100">
-            <form class="login100-form validate-form p-l-55 p-r-55 p-t-178" th:action="@{/employees/update}" method="post">
-					<span class="login100-form-title">
-						직원 등록
-					</span>
+<body class="bg-primary">
+<div id="layoutAuthentication">
+    <div id="layoutAuthentication_content">
+        <main>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-5">
+                        <div class="card shadow-lg border-0 rounded-lg mt-5">
+                            <div class="card-header"><h3 class="text-center font-weight-light my-4">직원 정보 수정</h3></div>
+                            <div class="card-body">
+                                <form th:action="@{'/employees/update/' + ${employee.id}}" th:method="put">
+                                    <div class="mb-3">
+                                        <input class="form-control" type="text" id="name" name="id"
+                                               th:value="${#numbers.formatInteger(employee.id,3)}"/>
+                                    </div>
 
-                <div class="wrap-input100 validate-input m-b-16">
-                    <input class="input100" type="text" name="name" placeholder="이름">
-                    <span class="focus-input100"></span>
+                                    <div class="mb-3">
+                                        <input class="form-control" id="email" type="text" name="name"
+                                               th:value="${employee.name}"/>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <select name="position" th:with="position = ${employee.position.name()}">
+                                            <option value="CEO" th:selected="${position == 'CEO'}">CEO</option>
+                                            <option value="CTO" th:selected="${position == 'CTO'}">CTO</option>
+                                            <option value="MANAGER" th:selected="${position == 'MANAGER'}">MANAGER
+                                            </option>
+                                            <option value="STAFF" th:selected="${position == 'STAFF'}">STAFF</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <input class="form-control" id="email" type="text" name="email"
+                                               th:value="${employee.email}"/>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <input class="form-control" id="phoneNum" type="text" name="phone"
+                                               maxlength="13"
+                                               th:value="${employee.phone}"/>
+                                    </div>
+
+                                    <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                        <button class="btn btn-primary">수정하기</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="wrap-input100 validate-input m-b-16">
-                    <input class="input100" type="text" name="position" placeholder="직급">
-                    <span class="focus-input100"></span>
-                </div>
-
-                <div class="wrap-input100 validate-input m-b-16">
-                    <input class="input100" type="text" name="email" placeholder="이메일">
-                    <span class="focus-input100"></span>
-                </div>
-
-                <div class="wrap-input100 validate-input m-b-16">
-                    <input class="input100" type="password" name="phone" placeholder="전화번호">
-                    <span class="focus-input100"></span>
-                </div>
-
-            </form>
-        </div>
+            </div>
+        </main>
     </div>
 </div>
-<head th:replace="fragments/fragment::accountScriptResources"></head>
+<div th:replace="fragments/fragment::indexScript"></div>
+<script th:replace="fragments/fragment::phoneScript"></script>
 </body>
 </html>

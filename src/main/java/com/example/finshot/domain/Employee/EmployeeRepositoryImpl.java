@@ -1,4 +1,4 @@
-package com.example.finshot.domain;
+package com.example.finshot.domain.Employee;
 
 import com.example.finshot.api.request.EmployeeSearchRequestDto;
 import com.querydsl.core.BooleanBuilder;
@@ -8,7 +8,8 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 
-import static com.example.finshot.domain.QEmployee.employee;
+import static com.example.finshot.domain.Employee.QEmployee.employee;
+
 
 @RequiredArgsConstructor
 public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {

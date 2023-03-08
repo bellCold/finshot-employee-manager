@@ -1,6 +1,6 @@
-package com.example.finshot.domain;
+package com.example.finshot.domain.Employee;
 
-import com.example.finshot.api.request.EmployeeUpdateDto;
+import com.example.finshot.api.request.EmployeeUpdateRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,8 +38,7 @@ public class Employee {
         this.email = email;
     }
 
-    public void update(EmployeeUpdateDto employeeUpdateDto) {
-        this.id = employeeUpdateDto.getId();
+    public void update(EmployeeUpdateRequestDto employeeUpdateDto) {
         this.email = employeeUpdateDto.getEmail();
         this.name = employeeUpdateDto.getName();
         this.position = employeeUpdateDto.getPosition();

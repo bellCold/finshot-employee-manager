@@ -1,7 +1,7 @@
 package com.example.finshot.api;
 
 import com.example.finshot.application.EmployeeService;
-import com.example.finshot.domain.Employee;
+import com.example.finshot.domain.Employee.Employee;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

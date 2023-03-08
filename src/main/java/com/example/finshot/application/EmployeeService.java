@@ -1,15 +1,16 @@
 package com.example.finshot.application;
 
 import com.example.finshot.api.request.EmployeeRegisterRequestDto;
-import com.example.finshot.api.request.EmployeeSearchRequestDto;
+import com.example.finshot.api.request.EmployeeUpdateRequestDto;
 import com.example.finshot.api.response.EmployeeListResponseDto;
-import com.example.finshot.api.response.EmployeeSearchResponseDto;
-import com.example.finshot.domain.Employee;
-import com.example.finshot.domain.EmployeeRepository;
+import com.example.finshot.api.response.EmployeeUpdateResponseDto;
+import com.example.finshot.domain.Employee.Employee;
+import com.example.finshot.domain.Employee.EmployeePosition;
+import com.example.finshot.domain.Employee.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Service
@@ -31,7 +32,27 @@ public class EmployeeService {
     }
 
     public List<Employee> findBySearchWord(String searchWord) {
-        return null;
+        EmployeeListResponseDto employeeListResponseDto = new EmployeeListResponseDto();
+        if (isNumeric(searchWord)) {
+            Employee employee = employeeRepository.findById(Long.parseLong(searchWord)).orElseThrow(RuntimeException::new);
+            employeeListResponseDto.getEmployees().add(employee);
+        } else {
+            addEmployeeBySearchWord(employeeListResponseDto, searchWord);
+        }
+
+        return employeeListResponseDto.getEmployees();
+    }
+
+    private void addEmployeeBySearchWord(EmployeeListResponseDto employeeListResponseDto, String searchWord) {
+        List<Employee> byPositionContaining = employeeRepository.findByPositionContaining(EmployeePosition.valueOf(searchWord));
+        List<Employee> byEmailContaining = employeeRepository.findByEmailContaining(searchWord);
+        List<Employee> byNameContaining = employeeRepository.findByNameContaining(searchWord);
+        List<Employee> byPhoneContaining = employeeRepository.findByPhoneContaining(searchWord);
+
+        toEmployeeListResponseDto(byEmailContaining, employeeListResponseDto.getEmployees());
+        toEmployeeListResponseDto(byPhoneContaining, employeeListResponseDto.getEmployees());
+        toEmployeeListResponseDto(byNameContaining, employeeListResponseDto.getEmployees());
+        toEmployeeListResponseDto(byPositionContaining, employeeListResponseDto.getEmployees());
     }
 
     private static boolean isNumeric(String searchWord) {
@@ -41,20 +62,20 @@ public class EmployeeService {
     private void toEmployeeListResponseDto(List<Employee> employees, List<Employee> responseDto) {
         responseDto.addAll(employees);
     }
-//
-//    @Transactional
-//    public void update(String path, EmployeeUpdateDto employeeUpdateDto) {
-//        Employee employee = employeeRepository.findById(path).orElseThrow(RuntimeException::new);
-//        employee.update(employeeUpdateDto);
-//    }
-//
-//    @Transactional
-//    public void delete(String path) {
-//        Employee employee = employeeRepository.findById(path).orElseThrow(RuntimeException::new);
-//        employeeRepository.delete(employee);
-//    }
-//
-//    public Employee findEmployee(String path) {
-//        return employeeRepository.findById(path).orElseThrow(RuntimeException::new);
-//    }
+
+    public void deleteEmployee(Long path) {
+        Employee employee = employeeRepository.findById(path).orElseThrow(RuntimeException::new);
+        employeeRepository.delete(employee);
+    }
+
+    @Transactional
+    public void updateEmployee(Long path, EmployeeUpdateRequestDto employeeUpdateDto) {
+        Employee employee = employeeRepository.findById(path).orElseThrow(RuntimeException::new);
+        employee.update(employeeUpdateDto);
+    }
+
+    public EmployeeUpdateResponseDto findEmployee(Long path) {
+        Employee employee = employeeRepository.findById(path).orElseThrow(RuntimeException::new);
+        return EmployeeUpdateResponseDto.toDto(employee);
+    }
 }
