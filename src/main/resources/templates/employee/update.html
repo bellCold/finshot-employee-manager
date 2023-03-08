@@ -17,10 +17,12 @@
                     <span class="focus-input100"></span>
                 </div>
 
-                <div class="wrap-input100 validate-input m-b-16">
-                    <input class="input100" type="text" name="position" th:value="${employee.position.name()}"/>
-                    <span class="focus-input100"></span>
-                </div>
+                <select name="position" th:with="position = ${employee.position.name()}">
+                    <option value="CEO" th:selected="${position == 'CEO'}">CEO</option>
+                    <option value="CTO" th:selected="${position == 'CTO'}">CTO</option>
+                    <option value="MANAGER" th:selected="${position == 'MANAGER'}">MANAGER</option>
+                    <option value="STAFF" th:selected="${position == 'STAFF'}">STAFF</option>
+                </select>
 
                 <div class="wrap-input100 validate-input m-b-16">
                     <input class="input100" type="text" name="email" th:value="${employee.email}"/>
@@ -28,7 +30,8 @@
                 </div>
 
                 <div class="wrap-input100 validate-input m-b-16">
-                    <input class="input100" type="password" name="phone" th:value="${employee.phone}"/>
+                    <input class="input100" id="phoneNum" type="phone" name="phone" maxlength="13"
+                           th:value="${employee.phone}"/>
                     <span class="focus-input100"></span>
                 </div>
                 <button class="btn btn-outline-primary">수정하기</button>
@@ -36,6 +39,8 @@
         </div>
     </div>
 </div>
+
 <div th:replace="fragments/fragment::accountScriptResources"></div>
+<script th:replace="fragments/fragment::phoneScript"></script>
 </body>
 </html>
