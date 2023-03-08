@@ -11,7 +11,7 @@ import javax.validation.constraints.Pattern;
 @Getter
 @Setter
 @NoArgsConstructor
-public class EmployeeUpdateDto {
+public class EmployeeUpdateRequestDto {
     private Long id;
     private String name;
 

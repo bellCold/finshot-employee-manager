@@ -1,38 +1,41 @@
 <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/fragment::mainHeadResources"></head>
 <body>
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            <form class="login100-form validate-form p-l-55 p-r-55 p-t-178" th:action="@{/employees/update}" method="post">
-					<span class="login100-form-title">
-						직원 등록
-					</span>
-
+            <form class="login100-form validate-form p-l-55 p-r-55 p-t-178"
+                  th:action="@{'/employees/update/' + ${employee.id}}" th:method="put">
                 <div class="wrap-input100 validate-input m-b-16">
-                    <input class="input100" type="text" name="name" placeholder="이름">
+                    <input class="input100" type="text" name="id" th:value="${#numbers.formatInteger(employee.id,3)}">
                     <span class="focus-input100"></span>
                 </div>
 
                 <div class="wrap-input100 validate-input m-b-16">
-                    <input class="input100" type="text" name="position" placeholder="직급">
+                    <input class="input100" type="text" name="name" th:value="${employee.name}"/>
                     <span class="focus-input100"></span>
                 </div>
 
                 <div class="wrap-input100 validate-input m-b-16">
-                    <input class="input100" type="text" name="email" placeholder="이메일">
+                    <input class="input100" type="text" name="position" th:value="${employee.position.name()}"/>
                     <span class="focus-input100"></span>
                 </div>
 
                 <div class="wrap-input100 validate-input m-b-16">
-                    <input class="input100" type="password" name="phone" placeholder="전화번호">
+                    <input class="input100" type="text" name="email" th:value="${employee.email}"/>
                     <span class="focus-input100"></span>
                 </div>
 
+                <div class="wrap-input100 validate-input m-b-16">
+                    <input class="input100" type="password" name="phone" th:value="${employee.phone}"/>
+                    <span class="focus-input100"></span>
+                </div>
+                <button class="btn btn-outline-primary">수정하기</button>
             </form>
         </div>
     </div>
 </div>
-<head th:replace="fragments/fragment::accountScriptResources"></head>
+<div th:replace="fragments/fragment::accountScriptResources"></div>
 </body>
 </html>

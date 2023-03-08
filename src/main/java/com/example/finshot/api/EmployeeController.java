@@ -2,7 +2,9 @@ package com.example.finshot.api;
 
 import com.example.finshot.api.request.EmployeeRegisterRequestDto;
 import com.example.finshot.api.request.EmployeeSearchRequestDto;
+import com.example.finshot.api.request.EmployeeUpdateRequestDto;
 import com.example.finshot.api.response.EmployeeSearchResponseDto;
+import com.example.finshot.api.response.EmployeeUpdateResponseDto;
 import com.example.finshot.application.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -36,22 +38,22 @@ public class EmployeeController {
         return "/employee/search";
     }
 
-//    @GetMapping("/update/{path}")
-//    public String updateForm(@PathVariable String path, Model model) {
-//        Employee employee = employeeService.findEmployee(path);
-//        model.addAttribute("employee", employee);
-//        return "/employee/update";
-//    }
-//
-//    @PutMapping("/update/{path}")
-//    public String updateEmployee(@PathVariable String path, @Valid EmployeeUpdateDto employeeUpdateDto) {
-//        employeeService.update(path, employeeUpdateDto);
-//        return "redirect:/";
-//    }
-//
+    @GetMapping("/update/{path}")
+    public String updateForm(@PathVariable Long path, Model model) {
+        EmployeeUpdateResponseDto employee = employeeService.findEmployee(path);
+        model.addAttribute("employee", employee);
+        return "/employee/update";
+    }
+
+    @PutMapping("/update/{path}")
+    public String updateEmployee(@PathVariable Long path, @Valid EmployeeUpdateRequestDto employeeUpdateDto) {
+        employeeService.updateEmployee(path, employeeUpdateDto);
+        return "redirect:/";
+    }
+
     @DeleteMapping("/delete/{path}")
     public String deleteEmployee(@PathVariable Long path) {
-        employeeService.deleteEmployeeByPath(path);
+        employeeService.deleteEmployee(path);
         return "redirect:/";
     }
 }
