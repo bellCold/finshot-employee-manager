@@ -1,4 +1,4 @@
-package com.example.finshot.domain;
+package com.example.finshot.domain.Employee;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

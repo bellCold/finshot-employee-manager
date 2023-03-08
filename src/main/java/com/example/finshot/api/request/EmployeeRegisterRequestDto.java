@@ -1,7 +1,7 @@
 package com.example.finshot.api.request;
 
-import com.example.finshot.domain.Employee;
-import com.example.finshot.domain.EmployeePosition;
+import com.example.finshot.domain.Employee.Employee;
+import com.example.finshot.domain.Employee.EmployeePosition;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

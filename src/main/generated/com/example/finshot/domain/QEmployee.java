@@ -2,6 +2,8 @@ package com.example.finshot.domain;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
+import com.example.finshot.domain.Employee.Employee;
+import com.example.finshot.domain.Employee.EmployeePosition;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;

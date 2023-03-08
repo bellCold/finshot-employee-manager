@@ -1,6 +1,6 @@
 package com.example.finshot.api.response;
 
-import com.example.finshot.domain.Employee;
+import com.example.finshot.domain.Employee.Employee;
 import lombok.Getter;
 
 import java.util.ArrayList;

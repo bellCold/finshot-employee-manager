@@ -1,4 +1,4 @@
-package com.example.finshot.domain;
+package com.example.finshot.domain.Employee;
 
 public enum EmployeePosition {
     CEO,
