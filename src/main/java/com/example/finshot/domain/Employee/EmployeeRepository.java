@@ -1,17 +1,13 @@
 package com.example.finshot.domain.Employee;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.List;
 
-public interface EmployeeRepository extends JpaRepository<Employee, Long> {
-    List<Employee> findAllByOrderByName();
+public interface EmployeeRepository {
+    void save(Employee employee);
 
-    List<Employee> findByNameContaining(String searchWord);
+    Employee findEmployee(Long id);
 
-    List<Employee> findByPhoneContaining(String searchWord);
+    List<Employee> findEmployeeByPosition(EmployeePosition position);
 
-    List<Employee> findByEmailContaining(String searchWord);
-
-    List<Employee> findByPosition(EmployeePosition position);
+    List<Employee> findByName(String name);
 }

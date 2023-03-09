@@ -2,7 +2,7 @@ package com.example.finshot.employee;
 
 import com.example.finshot.domain.Employee.Employee;
 import com.example.finshot.domain.Employee.EmployeePosition;
-import com.example.finshot.domain.Employee.EmployeeRepository;
+import com.example.finshot.domain.Employee.EmployeeJpaRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class FindEmployeeTest2 {
 
     @Autowired
-    EmployeeRepository employeeRepository;
+    EmployeeJpaRepository employeeRepository;
 
     @Test
     @DisplayName("enumType으로 찾기")

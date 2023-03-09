@@ -6,7 +6,7 @@ import com.example.finshot.api.response.EmployeeListResponseDto;
 import com.example.finshot.api.response.EmployeeUpdateResponseDto;
 import com.example.finshot.domain.Employee.Employee;
 import com.example.finshot.domain.Employee.EmployeePosition;
-import com.example.finshot.domain.Employee.EmployeeRepository;
+import com.example.finshot.domain.Employee.EmployeeJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class EmployeeService {
 
-    private final EmployeeRepository employeeRepository;
+    private final EmployeeJpaRepository employeeRepository;
 
     public void register(EmployeeRegisterRequestDto employeeRegisterDto) {
         Employee employee = employeeRegisterDto.toEntity();

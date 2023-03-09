@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class EmployeeMemoryRepository implements Repository {
+public class EmployeeMemoryRepository implements EmployeeRepository {
 
     private final Map<Long, Employee> memoryRepository = new HashMap<>();
     private Long sequence = 1L;

@@ -3,7 +3,7 @@ package com.example.finshot.employee;
 import com.example.finshot.domain.Employee.Employee;
 import com.example.finshot.domain.Employee.EmployeeMemoryRepository;
 import com.example.finshot.domain.Employee.EmployeePosition;
-import com.example.finshot.domain.Employee.Repository;
+import com.example.finshot.domain.Employee.EmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class FindEmployeeTest {
 
-    Repository repository = new EmployeeMemoryRepository();
+    EmployeeRepository repository = new EmployeeMemoryRepository();
 
     @BeforeEach
     void registerEmployee() {
