@@ -1,6 +1,5 @@
 package com.example.finshot.api.request;
 
-import com.example.finshot.domain.Employee.EmployeePosition;
 import lombok.Getter;
 import lombok.Setter;
 

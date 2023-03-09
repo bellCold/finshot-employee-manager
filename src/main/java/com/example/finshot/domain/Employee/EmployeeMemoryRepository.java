@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class EmployeeMemoryRepository implements EmployeeRepository {
 
-    private final Map<Long, Employee> memoryRepository = new HashMap<>();
+    private static Map<Long, Employee> memoryRepository = new HashMap<>();
     private Long sequence = 1L;
 
     @Override
@@ -24,22 +24,22 @@ public class EmployeeMemoryRepository implements EmployeeRepository {
     @Override
     public List<Employee> findEmployeeByPosition(EmployeePosition position) {
         List<Employee> employees = new ArrayList<>();
-        for (Long id : memoryRepository.keySet()) {
-            if (memoryRepository.get(id).getPosition() == position) {
-                employees.add(memoryRepository.get(id));
+        memoryRepository.forEach((id, employee) -> {
+            if (employee.getPosition() == position) {
+                employees.add(employee);
             }
-        }
+        });
         return employees;
     }
 
     @Override
     public List<Employee> findByName(String name) {
         List<Employee> employees = new ArrayList<>();
-        for (Long id : memoryRepository.keySet()) {
-            if (memoryRepository.get(id).getName().equals(name)) {
-                employees.add(memoryRepository.get(id));
+        memoryRepository.forEach((id, employee) -> {
+            if (employee.getName().equals(name)) {
+                employees.add(employee);
             }
-        }
+        });
         return employees;
     }
 }
