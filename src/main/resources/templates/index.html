@@ -2,12 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/fragment::mainHeadResources"></head>
 <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand ps-3" th:href="@{/}">직원 정보 관리</a>
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0"
-                  th:action="@{/employees/search}">
-                <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." name="searchWord"
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <a class="navbar-brand ps-3" th:href="@{/}">직원 정보 관리</a>
+    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0"
+          th:action="@{/employees/search}">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."
+                   name="searchWord"
                    aria-describedby="btnNavbarSearch"/>
             <button class="btn btn-primary" id="btnNavbarSearch"><i class="fas fa-search"></i></button>
         </div>
@@ -67,6 +68,9 @@
             </div>
         </div>
     </main>
+</div>
+<div class="container">
+    <button class="btn btn-outline-primary"><a th:href="@{/download/csv}" download="data.csv" id="downloadLink">직원 리스트 다운로드</a></button>
 </div>
 <div th:replace="fragments/fragment::indexScript"></div>
 </body>
