@@ -1,21 +1,20 @@
 package com.example.finshot.employee;
 
 import com.example.finshot.domain.Employee.Employee;
+import com.example.finshot.domain.Employee.EmployeeMemoryRepository;
 import com.example.finshot.domain.Employee.EmployeePosition;
-import com.example.finshot.domain.Employee.EmployeeRepository;
+import com.example.finshot.domain.Employee.Repository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-@SpringBootTest
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class FindEmployeeTest {
 
-    @Autowired
-    EmployeeRepository employeeRepository;
+    Repository repository = new EmployeeMemoryRepository();
 
     @BeforeEach
     void registerEmployee() {
@@ -26,14 +25,21 @@ public class FindEmployeeTest {
                 .position(EmployeePosition.CEO)
                 .build();
 
-        employeeRepository.save(employee);
+        repository.save(employee);
     }
 
 
     @Test
-    @DisplayName("enum값으로 회원찾기")
-    void findEmployeeByEnumType() {
-        List<Employee> all = employeeRepository.findAll();
+    @DisplayName("name값으로 회원찾기")
+    void findEmployeeByName() {
+        List<Employee> employees = repository.findByName("김종찬");
+        assertThat(employees.size()).isEqualTo(1);
+    }
 
+    @Test
+    @DisplayName("enum값으로 회원찾기")
+    void findEmployeeByEnum() {
+        List<Employee> employees = repository.findEmployeeByPosition(EmployeePosition.CEO);
+        assertThat(employees.size()).isEqualTo(1);
     }
 }

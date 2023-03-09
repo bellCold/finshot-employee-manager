@@ -11,7 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -33,18 +35,28 @@ public class EmployeeService {
 
     public List<Employee> findBySearchWord(String searchWord) {
         EmployeeListResponseDto employeeListResponseDto = new EmployeeListResponseDto();
-        if (isNumeric(searchWord)) {
-            Employee employee = employeeRepository.findById(Long.parseLong(searchWord)).orElseThrow(RuntimeException::new);
+        if (isNumeric(searchWord) && isExistEmployeeById(searchWord)) {
+            Employee employee = employeeRepository.findById(Long.parseLong(searchWord)).orElseThrow();
             employeeListResponseDto.getEmployees().add(employee);
-        } else {
-            addEmployeeBySearchWord(employeeListResponseDto, searchWord);
         }
 
-        return employeeListResponseDto.getEmployees();
+        return toEmployeeListResponseDto(employeeListResponseDto, searchWord);
     }
 
-    private void addEmployeeBySearchWord(EmployeeListResponseDto employeeListResponseDto, String searchWord) {
-        List<Employee> byPositionContaining = employeeRepository.findByPositionContaining(EmployeePosition.valueOf(searchWord));
+    private boolean isExistEmployeeById(String searchWord) {
+        return employeeRepository.existsById(Long.parseLong(searchWord));
+    }
+
+    private List<Employee> toEmployeeListResponseDto(EmployeeListResponseDto employeeListResponseDto, String searchWord) {
+        List<String> positionList = EmployeePosition.getPosition(searchWord);
+
+        if (positionList != null) {
+            positionList.forEach(position -> {
+                List<Employee> byPosition = employeeRepository.findByPosition(EmployeePosition.valueOf(position));
+                toEmployeeListResponseDto(byPosition, employeeListResponseDto.getEmployees());
+            });
+        }
+
         List<Employee> byEmailContaining = employeeRepository.findByEmailContaining(searchWord);
         List<Employee> byNameContaining = employeeRepository.findByNameContaining(searchWord);
         List<Employee> byPhoneContaining = employeeRepository.findByPhoneContaining(searchWord);
@@ -52,7 +64,18 @@ public class EmployeeService {
         toEmployeeListResponseDto(byEmailContaining, employeeListResponseDto.getEmployees());
         toEmployeeListResponseDto(byPhoneContaining, employeeListResponseDto.getEmployees());
         toEmployeeListResponseDto(byNameContaining, employeeListResponseDto.getEmployees());
-        toEmployeeListResponseDto(byPositionContaining, employeeListResponseDto.getEmployees());
+
+        sortByName(employeeListResponseDto);
+
+        return distinct(employeeListResponseDto);
+    }
+
+    private List<Employee> distinct(EmployeeListResponseDto employeeListResponseDto) {
+        return employeeListResponseDto.getEmployees().stream().distinct().collect(Collectors.toList());
+    }
+
+    private void sortByName(EmployeeListResponseDto employeeListResponseDto) {
+        employeeListResponseDto.getEmployees().sort(Comparator.comparing(Employee::getName));
     }
 
     private static boolean isNumeric(String searchWord) {
