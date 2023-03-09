@@ -1,6 +1,7 @@
 package com.example.finshot.domain.Employee;
 
 import com.example.finshot.api.request.EmployeeUpdateRequestDto;
+import com.example.finshot.domain.BaseEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Employee {
+public class Employee extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
