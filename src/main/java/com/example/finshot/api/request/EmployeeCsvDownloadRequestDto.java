@@ -1,13 +1,15 @@
-package com.example.finshot.api.response;
+package com.example.finshot.api.request;
 
 import com.example.finshot.domain.Employee.EmployeePosition;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
-public class EmployeeResponseDto {
+@Setter
+public class EmployeeCsvDownloadRequestDto {
     private String id;
+    private String name;
+    private String position;
     private String email;
     private String phone;
-    private String name;
-    private EmployeePosition position;
 }
