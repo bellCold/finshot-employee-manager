@@ -17,12 +17,12 @@ public class EmployeeMemoryRepository implements EmployeeRepository {
     }
 
     @Override
-    public Employee findEmployee(Long id) {
+    public Employee findById(Long id) {
         return memoryRepository.get(id);
     }
 
     @Override
-    public List<Employee> findEmployeeByPosition(EmployeePosition position) {
+    public List<Employee> findByPosition(EmployeePosition position) {
         List<Employee> employees = new ArrayList<>();
         memoryRepository.forEach((id, employee) -> {
             if (employee.getPosition() == position) {

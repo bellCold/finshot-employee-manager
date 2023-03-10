@@ -1,4 +1,4 @@
-package com.example.finshot.employee;
+package com.example.finshot.domain;
 
 import com.example.finshot.domain.Employee.Employee;
 import com.example.finshot.domain.Employee.EmployeeMemoryRepository;
@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FindEmployeeTest {
+public class EmployeeTest {
 
     EmployeeRepository repository = new EmployeeMemoryRepository();
 
@@ -39,7 +39,15 @@ public class FindEmployeeTest {
     @Test
     @DisplayName("enum값으로 회원찾기")
     void findEmployeeByEnum() {
-        List<Employee> employees = repository.findEmployeeByPosition(EmployeePosition.CEO);
+        List<Employee> employees = repository.findByPosition(EmployeePosition.CEO);
         assertThat(employees.size()).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("id 값으로 회원찾기")
+    void findByIdTest() {
+        Employee employee = repository.findById(1L);
+        assertThat(employee.getEmail()).isEqualTo("test@naver.com");
+        assertThat(employee.getPhone()).isEqualTo("010-1234-1234");
     }
 }

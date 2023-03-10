@@ -5,9 +5,9 @@ import java.util.List;
 public interface EmployeeRepository {
     void save(Employee employee);
 
-    Employee findEmployee(Long id);
+    Employee findById(Long id);
 
-    List<Employee> findEmployeeByPosition(EmployeePosition position);
+    List<Employee> findByPosition(EmployeePosition position);
 
     List<Employee> findByName(String name);
 }
