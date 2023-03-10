@@ -13,7 +13,7 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/download")
 @RequiredArgsConstructor
-public class DownLoadController {
+public class EmployeeListDownLoadController {
 
     private final DownLoadService downLoadService;
 
