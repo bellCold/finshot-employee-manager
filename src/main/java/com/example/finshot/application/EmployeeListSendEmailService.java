@@ -27,6 +27,7 @@ public class EmployeeListSendEmailService {
             EmailMessage emailMessage = EmailMessage.builder()
                     .to(receiverEmail)
                     .subject(EMAIL_SUBJECT)
+                    .fileName("직원리스트.csv")
                     .message("직원리스트")
                     .build();
 
