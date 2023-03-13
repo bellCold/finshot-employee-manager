@@ -1,14 +1,13 @@
 package com.example.finshot.api.request;
 
+import com.example.finshot.domain.Employee.Employee;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
 public class EmployeeCsvDownloadRequestDto {
-    private String id;
-    private String name;
-    private String position;
-    private String email;
-    private String phone;
+    private List<Employee> employees;
 }

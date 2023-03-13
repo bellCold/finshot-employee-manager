@@ -1,7 +1,7 @@
 package com.example.finshot.api;
 
 import com.example.finshot.api.request.EmployeeCsvDownloadRequestDto;
-import com.example.finshot.application.DownLoadService;
+import com.example.finshot.application.EmployeeListDownLoadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,11 +15,11 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class EmployeeListDownLoadController {
 
-    private final DownLoadService downLoadService;
+    private final EmployeeListDownLoadService downLoadService;
 
     @PostMapping("/csv")
-    public void downloadCsv(HttpServletResponse response, EmployeeCsvDownloadRequestDto requestDto) throws IOException {
-        downLoadService.downloadCsv(response, requestDto);
+    public void downloadCsvTest(HttpServletResponse response, EmployeeCsvDownloadRequestDto csvDownloadRequestDto) throws IOException {
+        downLoadService.downloadCsv(response, csvDownloadRequestDto);
     }
 
 }

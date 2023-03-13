@@ -16,24 +16,30 @@ import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 @RequiredArgsConstructor
 public class EmployeeListSendEmailService {
 
+    private final EmployeeListDownLoadService employeeListDownLoadService;
+    private final EmailService emailService;
+
+
     @Value("${receiver.email.address}")
     private String receiverEmail;
 
-    private final EmailService emailService;
     private final String EMAIL_SUBJECT = LocalDateTime.now().format(ISO_LOCAL_DATE) + "finShot 직원리스트";
+    private final String FILE_NAME = "직원리스트.csv";
+    private final String MESSAGE = LocalDateTime.now().format(ISO_LOCAL_DATE) + "finShot 직원리스트입니다";
 
     public void sendEmployeeListEmail() {
         try {
             EmailMessage emailMessage = EmailMessage.builder()
                     .to(receiverEmail)
                     .subject(EMAIL_SUBJECT)
-                    .fileName("직원리스트.csv")
-                    .message("직원리스트")
+                    .fileName(FILE_NAME)
+                    .file(employeeListDownLoadService.makeEmployeeListCsvFile())
+                    .message(MESSAGE)
                     .build();
 
             emailService.sendEmail(emailMessage);
         } catch (Exception e) {
-            log.warn("전송 실패: {}", e);
+            log.warn("전송 실패: {}", e.getMessage());
         }
     }
 }
