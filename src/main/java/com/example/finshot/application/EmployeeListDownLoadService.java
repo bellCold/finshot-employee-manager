@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.*;
 import java.util.List;
 
@@ -43,12 +44,11 @@ public class EmployeeListDownLoadService {
         }
     }
 
-    public File makeEmployeeListCsvFile() throws IOException {
+    public File makeEmployeeListCsvFile(String fileName) throws IOException {
         List<Employee> employees = employeeService.findAll();
-        String fileName = "mydata.csv";
-        FileWriter fileWriter = new FileWriter(fileName);
+        File file = new File(fileName);
+        FileWriter fileWriter = new FileWriter(file, true);
         makeCsvForm(employees, fileWriter);
-
-        return null;
+        return file;
     }
 }

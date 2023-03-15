@@ -23,9 +23,9 @@ public class EmployeeListSendEmailService {
     @Value("${receiver.email.address}")
     private String receiverEmail;
 
-    private final String EMAIL_SUBJECT = LocalDateTime.now().format(ISO_LOCAL_DATE) + "finShot 직원리스트";
+    private final String EMAIL_SUBJECT = LocalDateTime.now().format(ISO_LOCAL_DATE) + " finShot 직원리스트";
     private final String FILE_NAME = "직원리스트.csv";
-    private final String MESSAGE = LocalDateTime.now().format(ISO_LOCAL_DATE) + "finShot 직원리스트입니다";
+    private final String MESSAGE = LocalDateTime.now().format(ISO_LOCAL_DATE) + " finShot 직원리스트입니다";
 
     public void sendEmployeeListEmail() {
         try {
@@ -33,7 +33,7 @@ public class EmployeeListSendEmailService {
                     .to(receiverEmail)
                     .subject(EMAIL_SUBJECT)
                     .fileName(FILE_NAME)
-                    .file(employeeListDownLoadService.makeEmployeeListCsvFile())
+                    .file(employeeListDownLoadService.makeEmployeeListCsvFile(FILE_NAME))
                     .message(MESSAGE)
                     .build();
 
